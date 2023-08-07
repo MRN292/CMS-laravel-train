@@ -40,16 +40,21 @@
                         @foreach ($posts as $post)
 
                             <tr>
-                                <td><img style="height: 50px; width: 50px" class="rounded-circle"
-                                         src="{{ asset("img/posts/$post->image") }}" alt="post Image"></td>
+                                <td>
+                                    <img style="height: 50px; width: 50px" class="rounded-circle"
+                                         src="{{ asset("img/posts/$post->image") }}" alt="post Image">
+                                </td>
                                 <td>
                                     <form action="{{ route('post-show', $post->id) }}" method="get">
                                         <button class="btn btn-link">{{ $post->id }} </button>
                                     </form>
                                 </td>
-                                <td>{{ $post->title }} </td>
+                                <td>
+                                    {{ $post->title }}
+                                </td>
                                 @if (auth()->user()->role == 'manager')
-                                    <td><label class="toggle">
+                                    <td>
+                                        <label class="toggle">
 
                                             <input data-id='{{ $post->id }}' class="toggle-checkbox showCheck"
                                                    type="checkbox"
@@ -59,14 +64,17 @@
                                             <div class="toggle-switch"></div>
                                         </label>
                                     </td>
+
                                 @else
-                                    @if ($post->published == 0)
-                                        <span class="badge badge-warning">
+                                    <td>
+                                        @if ($post->published == 0)
+                                            <span class="badge badge-warning">
                                                 در انتضار انتشار</span>
-                                    @elseif($post->published == 1)
-                                        <span class="badge badge-success">
+                                        @elseif($post->published == 1)
+                                            <span class="badge badge-success">
                                                 منتشر شده</span>
-                                    @endif
+                                        @endif
+                                    </td>
                                 @endif
                                 <td class="d-flex">
                                     <form action="{{ route('post-edit', $post->id) }}" method="GET">
@@ -74,7 +82,7 @@
                                         <button class="m-1 text-white btn btn-info btn-sm">ویرایش</button>
 
                                     </form>
-                                    <button value="{{$post->id}}"  type="submit"
+                                    <button value="{{$post->id}}" type="submit"
                                             class="m-1 text-white btn btn-danger btn-sm post-delete">حذف
                                     </button>
                                 </td>

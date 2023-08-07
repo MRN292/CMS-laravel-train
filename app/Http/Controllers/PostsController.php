@@ -42,7 +42,7 @@ class PostsController extends Controller
     {
 
         $post = posts::find($id);
-        if ($post->published == 0 && auth()->user()->role != 'manager') {
+        if ($post->published == 0 && auth()->user()->role == 'user') {
             abort(403, 'Unauthorized.');
         }
         $tags = tags::all();
